@@ -1,9 +1,9 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_PREREQ(2.62)
+AC_PREREQ([2.71])
 LT_PREREQ(2.4)
 
-AC_INIT(SoX, 14.4.3git, sox-devel@lists.sourceforge.net)
+AC_INIT([SoX],[14.4.3git],[sox-devel@lists.sourceforge.net])
 
 dnl Increase version when binary compatibility with previous version is broken
 SHLIB_VERSION=3:0:0
@@ -33,16 +33,24 @@ PKG_PROG_PKG_CONFIG
 PKG_INSTALLDIR
 
 # removed to avoid script excution errors
-# AX_APPEND_COMPILE_FLAGS([-fstack-protector-strong])
-# AX_APPEND_COMPILE_FLAGS([-Wall -Wmissing-prototypes -Wstrict-prototypes])
-# AX_APPEND_LINK_FLAGS([-Wl,--as-needed])
+AX_APPEND_COMPILE_FLAGS([-fstack-protector-strong])
+AX_APPEND_COMPILE_FLAGS([-Wall -Wmissing-prototypes -Wstrict-prototypes])
+AX_APPEND_LINK_FLAGS([-Wl,--as-needed])
 
 dnl Check for system dependent features.
 AC_C_BIGENDIAN
 AC_C_INLINE
 
 dnl Checks for header files.
-AC_HEADER_STDC
+m4_warn([obsolete],
+[The preprocessor macro `STDC_HEADERS' is obsolete.
+  Except in unusual embedded environments, you can safely include all
+  ISO C90 headers unconditionally.])dnl
+# Autoupdate added the next two lines to ensure that your configure
+# script's behavior did not change.  They are probably safe to remove.
+AC_CHECK_INCLUDES_DEFAULT
+AC_PROG_EGREP
+
 AC_CHECK_HEADERS(fcntl.h unistd.h byteswap.h sys/ioctl.h sys/stat.h sys/time.h sys/timeb.h sys/types.h sys/utsname.h termios.h glob.h fenv.h)
 
 dnl Checks for library functions.
